@@ -93,30 +93,65 @@ dtproduction <- gather(dtproduction, month, production, Ene:Dic)
 # Todavia existe un valor que esta sobrando
 dtproduction <- dtproduction %>% filter( department!= "production") %>% arrange(department,month)
 
+#dtproduction$production <- str_replace_all(dtproduction$production, "--", "")
+
 # yield -------------------------------------------------------------------
-#dtyield <- dplyr::slice(dct, 91:120)
+
+dtyield <- dplyr::slice(dct, 91:120)
+
+# cabezeras de la tabla harva
+cyield <- c("department", "Ene",	"Feb",	"Mar",	"Abr",	"May",	"Jun",	"Jul",	"Ago",	"Set",	"Oct",
+             "Nov",	 "Dic")
+names(dtyield) <- cyield
+
+head(dtyield)
+dtyield <- gather(dtyield, month, yield, Ene:Dic)
+
+# Todavia existe un valor que esta sobrando
+dtyield <- dtyield %>%  filter( department!= "yield") %>% arrange(department,month)
+
+#dtyield$yield <- str_replace_all(dtyield$yield, "--", "")
+
 
 # pricePlot ---------------------------------------------------------------
 
-#dtpricePlot <- dplyr::slice(dct, 121:150)
+dtpricePlot <- dplyr::slice(dct, 121:150)
+
+dtpricePlot <- dplyr::slice(dct, 91:120)
+
+# cabezeras de la tabla harva
+cpricePlot <- c("department", "Ene",	"Feb",	"Mar",	"Abr",	"May",	"Jun",	"Jul",	"Ago",	"Set",	"Oct",
+            "Nov",	 "Dic")
+names(dtpricePlot) <- cpricePlot
+
+head(dtpricePlot)
+dtpricePlot <- gather(dtpricePlot, month, pricePlot, Ene:Dic)
+
+# Todavia existe un valor que esta sobrando
+dtpricePlot<- dtpricePlot %>%  filter( department!= "pricePlot") %>% arrange(department,month)
+
+#dtpricePlot$pricePlot <- str_replace_all(dtpricePlot$pricePlot, "--", "")
 
 
 
-## Como juntar las tablas con left_join
+# Como unir tablas por ID con LEFT_JOIN  ----------------------------------
 
 # Usamos la funcino left_join(x , y , by )
 # x : primera tabla
 # y: segunda tabla
 # by: criterio por el cual juntamos las tablas
 
-# out <- left_join(dtsowa, dtharva, by = c("department", "month")) %>% 
-#     left_join(dtproduction, by = c("department", "month"))
-# 
+tbtomate <- left_join(dtsowa, dtharva, by = c("department", "month")) %>%
+            left_join(., dtproduction, by = c("department", "month")) %>% 
+            left_join(., dtyield, by = c("department", "month")) %>%
+            left_join(., dtpricePlot, by = c("department", "month"))
 
-out <- out %>% mutate(year = 2005)
+# Agregamos el anho de las observaciones.
+
+tbtomate <- tbtomate %>% mutate(year = 2005)
 
 
-# Agregar la data procesada
+# Guardar tabla cultivo ---------------------------------------------------
 
 # wb <- loadWorkbook(fp2)
 # cult_sheet <- "tomate_proc"
@@ -125,7 +160,7 @@ out <- out %>% mutate(year = 2005)
 ##   removeWorksheet(wb, cult_sheet)
 ## }
 # addWorksheet(wb, "tomate_proc")
-# writeData(wb, sheet = "tomate_proc", x = out)
+# writeData(wb, sheet = "tomate_proc", x = tbtomate)
 # saveWorkbook(wb, file = fp2, overwrite = TRUE)
 
 
