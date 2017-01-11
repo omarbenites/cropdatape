@@ -29,12 +29,12 @@ dct <- dct[,-2]
 # Sowa: Sowing by area --------------------------------------------------------------------
 # Seleccionamos las filas 30 primeras filas (del 1 al 30)
 
-dtsowa <- dplyr::slice(dct, 1:30)
+dtsowa <-slice(dct, 1:30)
 csowa <- c("department", "Ago", "Set", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul")
 #asignar los nombres
 names(dtsowa) <- csowa 
 
-# Funcion 'gather(data, key, value)' (paquete tidyr): sirve para transponer las tablas 
+# Funcion: 'gather(data, key, value)' (paquete tidyr): sirve para transponer las tablas 
 # de forma ordenada.
 # Parametros o inputs dela funcion:
 # data: los datos a usar.
@@ -42,7 +42,7 @@ names(dtsowa) <- csowa
 # value: la columna que va almacenar los valores de cada cabezera. Se usa un 'rango'.
 
 head(dtsowa)
-dtsowa <- gather (dtsowa, month, sowa, Ago:Jul)
+dtsowa <- gather(dtsowa, month, sowa, Ago:Jul)
 
 # Todavia existe un valor que esta sobrando
 dtsowa <- dtsowa %>% filter( department!= "sowa") %>% arrange(department,month)
@@ -69,7 +69,7 @@ charva <- c("department", "Ene",	"Feb",	"Mar",	"Abr",	"May",	"Jun",	"Jul",	"Ago"
 names(dtharva) <- charva 
 
 head(dtharva)
-dtharva <- gather (dtharva, month, harva, Ene:Dic)
+dtharva <- gather(dtharva, month, harva, Ene:Dic)
 
 # Todavia existe un valor que esta sobrando
 dtharva <- dtharva %>% filter( department!= "harva") %>% arrange(department,month)
@@ -117,7 +117,6 @@ dtyield <- dtyield %>%  filter( department!= "yield") %>% arrange(department,mon
 
 dtpricePlot <- dplyr::slice(dct, 121:150)
 
-dtpricePlot <- dplyr::slice(dct, 91:120)
 
 # cabezeras de la tabla harva
 cpricePlot <- c("department", "Ene",	"Feb",	"Mar",	"Abr",	"May",	"Jun",	"Jul",	"Ago",	"Set",	"Oct",
@@ -132,6 +131,11 @@ dtpricePlot<- dtpricePlot %>%  filter( department!= "pricePlot") %>% arrange(dep
 
 #dtpricePlot$pricePlot <- str_replace_all(dtpricePlot$pricePlot, "--", "")
 
+# JOIN TABLES O Juntar Tablas
+
+out <- left_join( x = dtsowa, y = dtharva, by = c("department", "month")) %>% 
+       left_join(., dtproduction,  by = c("department", "month")) 
+       
 
 
 # Como unir tablas por ID con LEFT_JOIN  ----------------------------------
@@ -153,16 +157,25 @@ tbtomate <- tbtomate %>% mutate(year = 2005)
 
 # Guardar tabla cultivo ---------------------------------------------------
 
-# wb <- loadWorkbook(fp2)
-# cult_sheet <- "tomate_proc"
-# sheets <- excel_sheets(fp2)
-## if(cult_sheet %in% sheets){
-##   removeWorksheet(wb, cult_sheet)
-## }
-# addWorksheet(wb, "tomate_proc")
-# writeData(wb, sheet = "tomate_proc", x = tbtomate)
-# saveWorkbook(wb, file = fp2, overwrite = TRUE)
-
+ wb <- loadWorkbook(fp2)
+ cult_sheet <- "tomate_proc"
+ sheets <- excel_sheets(fp2)
+ 
+ # if (condicion) {
+ #  sentencias de codigo  
+ # }
+ # condicion: es un resultado que puede ser V o F
+ # cult_sheet %in% sheets
+ # is.element(el = cult_sheet, set = sheets)
+ 
+ if(cult_sheet %in% sheets){
+   removeWorksheet(wb, cult_sheet)
+ }
+ 
+ addWorksheet(wb, cult_sheet)
+ writeData(wb, sheet = cult_sheet, x = tbtomate)
+ saveWorkbook(wb, file = fp2, overwrite = TRUE)
+ shell.exec(fp2)
 
 
 
