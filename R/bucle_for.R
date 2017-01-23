@@ -108,9 +108,21 @@ library(data.table)
 # Funcion: rbindlist
 # Esta funcion sirve para juntar juntar una lista (tabla) una debajo de otra.
 
-#Como sabemos datos, es una lista que contine data.frames.
+# Como sabemos datos, es una lista que contine data.frames.
 tbem_tomate <- rbindlist(datos)
 
+
+# remover los caracteres "--"
+
+# Usamos la funcion str_replace_all (paquete stringr)
+# Funcion: str_replace_all(string , pattern, replacement )
+# Parametros
+# string: vector con los valores
+# pattern: el patron que deseamos reemplazar 
+# replacement: el valor por que remplaza al patron.
+# 
+
+# dcsowa$sowa <- str_replace_all(dcsowa$sowa, "--", "")
 
 
 
