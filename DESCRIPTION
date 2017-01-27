@@ -1,11 +1,28 @@
 Package: cropdatape
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Title: Agriculture Open Data Package from Peru.
+Version: 0.0.9
+Authors@R: c( 
+          person("Omar", "Benites-Alfaro", email = "obacc07@gmail.com", role = c("aut", "cre")),
+          person("Pablo", "Gutierrez-Vilchez", , "pgutierrez@lamolina.edu.pe", "aut"),
+          person("Jossyn", "Lockuan-Cotrina", , "20120056@lamolina.edu.pe", "aut"),
+          person("Giorgio", "Cruz-Fajardo", , "20120024@lamolina.edu.pe", "aut"),
+          person("Grace", "Guevara-Diaz", , "20140052@lamolina.edu.pe", "aut"),
+          person("Charlie", "Mendez-Morales", , "20140072@lamolina.edu.pe", "aut"),
+          person("Liliana", "Aragon-Caballero", , "lili@unalm.edu.pe", "ctb"),
+          person("Raul", "Blas", , "@unalm.edu.pe", "ctb"),
+          person("Agronomy Faculty UNALM", "cph"),
+          person("Agriculture Minestry of Peru", "cph")
+          )
+URL: https://github.com/omarbenites/cropdatape,
+     http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos
+BugReports: https://github.com/omarbenites/cropdatape/issues
+Description: An excerpt of the peruvian annual agricultural production data available at http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos. The package includes
+             6 crops,  rice, quinoa, potato, sweet potato, tomato and wheat; across 24 regions. Initially, all these data were in excel files which has been transformed
+             and assembled using tidy data principles, i.e. each variable is in a column, each observation is a row and each value is in a cell.
+             The variables are defined by sowing area and harvest area per crop, yield, production and price per plot, every one year, from 2005 to 2014.
 Depends:
     R (>= 3.3.1)
-License: What license is it under?
+License: CC0
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
