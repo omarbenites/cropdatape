@@ -34,3 +34,26 @@
 # 
 # cropdatape <- datos
 # save(cropdatape, file = "data/cropdatape.rda")
+# 
+# # Data from 2014 use diferent units ---------------------------------------
+# library(dplyr)
+# cp14 <- filter(cropdatape, year == 2014)
+# 
+## Tranformando las variables 
+# # sowa"       "harva"      "production" "yield" "pricePlot" 
+# # yield = tn/ha --> 1000kg/ha (yield * 1000)
+# # pricePlot =  Nuevos Soles/Tonelada --> nuevos.soles/1000kg (pricePlot/1000)
+# 
+# cp14$yield <- cp14$yield*1000
+# cp14$pricePlot <- cp14$pricePlot/1000
+# 
+# 
+# cp <- filter(cropdatape, year != 2014)
+# res <- rbind(cp, cp14)
+# cropdatape <- res
+# 
+# save(cropdatape, file = "data/cropdatape.rda")
+# 
+# 
+
+
