@@ -7,7 +7,7 @@ Authors@R: c(
           person("Jossyn", "Lockuan-Cotrina", , "20120056@lamolina.edu.pe", "aut"),
           person("Giorgio", "Cruz-Fajardo", , "20120024@lamolina.edu.pe", "aut"),
           person("Grace", "Guevara-Diaz", , "20140052@lamolina.edu.pe", "aut"),
-          person("Charlie", "Mendez-Morales", , "20140072@lamolina.edu.pe", "aut"),
+          person("Charrlie", "Mendez-Morales", , "20140072@lamolina.edu.pe", "aut"),
           person("Liliana", "Aragon-Caballero", , "lili@lamolina.edu.pe", "ctb"),
           person("Raul", "Blas-Sevillano", , "rblas@lamolina.edu.pe", "ctb"),
           person("Agronomy Faculty, National Agrarian University La Molina (UNALM)", role = "cph", comment = "Copyright holder of all R code"),
