@@ -1,7 +1,6 @@
 #' @title Annual agricultural production data of Peru
 #' 
-#' @description http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos. The   
-#' cropdatape package is based on the Integrated System of Agricultural Statistics (SIEA) of Peruvian Agriculture Minestry. 
+#' @description The cropdatape package is based on the Integrated System of Agricultural Statistics (SIEA) of Peruvian Agriculture Minestry. 
 #' The variables are: sowing and harvest area, production, crop yield, price per plot by region. The range of year covers from 
 #' 2005 to 2014. Some missing values (\code{NA}) means that in some periods there is no agriculture activity.
 #' 
@@ -15,7 +14,7 @@
 #'   \item{harva}{Harvest area measured by hectare (ha)}
 #'   \item{production}{Production of crop measured by tons (t)}
 #'   \item{yield}{Yield of crop measured by kilograms per hectare (kg/ha)}
-#'   \item{pricePlot}{Price per plot. The peruvian currency \code{peruvian sol} } 
+#'   \item{pricePlot}{Price per plot. The peruvian currency \code{peruvian nuevo sol} } 
 #' }
 #' @source http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos
 #' @docType data

@@ -7,7 +7,7 @@ Authors@R: c(
           person("Jossyn", "Lockuan-Cotrina", , "20120056@lamolina.edu.pe", "aut"),
           person("Giorgio", "Cruz-Fajardo", , "20120024@lamolina.edu.pe", "aut"),
           person("Grace", "Guevara-Diaz", , "20140052@lamolina.edu.pe", "aut"),
-          person("Charrlie", "Mendez-Morales", , "20140072@lamolina.edu.pe", "aut"),
+          person("Charlie", "Mendez-Morales", , "20140072@lamolina.edu.pe", "aut"),
           person("Liliana", "Aragon-Caballero", , "lili@lamolina.edu.pe", "ctb"),
           person("Raul", "Blas-Sevillano", , "rblas@lamolina.edu.pe", "ctb"),
           person("Agronomy Faculty, National Agrarian University La Molina (UNALM)", role = "cph", comment = "Copyright holder of all R code"),
@@ -16,10 +16,10 @@ Authors@R: c(
 URL: https://github.com/omarbenites/cropdatape,
      http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos
 BugReports: https://github.com/omarbenites/cropdatape/issues
-Description: An excerpt of the peruvian annual agricultural production data available at http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos. The package includes
-             6 crops: rice, quinoa, potato, sweet potato, tomato and wheat; across 24 regions. Initially, all these data were in excel files which has been transformed
+Description: An R data package based on the peruvian agricultural production data of Agriculture Minestry of Peru (MINAGRI). The first version includes
+             6 crops: rice, quinoa, potato, sweet potato, tomato and wheat; all of them across 24 regions. Initially,  in excel files which has been transformed
              and assembled using tidy data principles, i.e. each variable is in a column, each observation is a row and each value is in a cell.
-             The variables are defined by sowing area and harvest area per crop, yield, production and price per plot, every one year, from 2005 to 2014.
+             The variables variables are sowing and harvest area per crop, yield, production and price per plot, every one year, from 2005 to 2014.
 Depends:
     R (>= 3.3.1)
 License:  MIT + file LICENSE
