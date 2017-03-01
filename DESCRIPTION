@@ -1,6 +1,6 @@
 Package: cropdatape
-Title: Peruvian Agriculture Open Data Package 
-Version: 0.0.9
+Title: Data from Agricultural Production of Crops in Peru
+Version: 1.0.0
 Authors@R: c( 
           person("Omar", "Benites-Alfaro", email = "obacc07@gmail.com", role = c("aut", "cre")),
           person("Pablo", "Gutierrez-Vilchez", , "pgutierrez@lamolina.edu.pe", "aut"),
