@@ -2,7 +2,7 @@
 #' 
 #' @description The cropdatape package is based on the Integrated System of Agricultural Statistics (SIEA) of Peruvian Agriculture Ministry. 
 #' The variables are: sowing and harvest area, production, crop yield, price per plot by region. The range of year covers from 
-#' 2004 to 2014. In case of 2004, it just considered from August to December (mid-seasson). Some missing values (\code{NA}) means that in some periods do not exists agricultural activity.
+#' 2004 to 2014. In case of 2004, it just considered from August to December (mid-seasson). Some missing values (\code{NA}) indicate that in some periods do not exists agricultural activity.
 #' 
 #' @format Data frame with --- rows and 9 columns.
 #' \describe{
