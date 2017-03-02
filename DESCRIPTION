@@ -16,7 +16,7 @@ Authors@R: c(
 URL: https://github.com/omarbenites/cropdatape,
      http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos
 BugReports: https://github.com/omarbenites/cropdatape/issues
-Description: An R data package based on the peruvian agricultural production data of Agriculture Minestry of Peru (MINAGRI). The first version includes
+Description: Provides peruvian agricultural production data from the Agriculture Minestry of Peru (MINAGRI). The first version includes
              6 crops: rice, quinoa, potato, sweet potato, tomato and wheat; all of them across 24 departments. Initially,  in excel files which has been transformed
              and assembled using tidy data principles, i.e. each variable is in a column, each observation is a row and each value is in a cell.
              The variables variables are sowing and harvest area per crop, yield, production and price per plot, every one year, from 2004 to 2014.
