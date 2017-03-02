@@ -11,7 +11,7 @@ Authors@R: c(
           person("Liliana", "Aragon-Caballero", , "lili@lamolina.edu.pe", "ctb"),
           person("Raul", "Blas-Sevillano", , "rblas@lamolina.edu.pe", "ctb"),
           person("Agronomy Faculty, National Agrarian University La Molina (UNALM)", role = "cph", comment = "Copyright holder of all R code"),
-          person("Agriculture Minestry of Peru (MINAGRI)", role = "cph", comment = "Data source come from MINAGRI")
+          person("Agriculture Ministry of Peru (MINAGRI)", role = "cph", comment = "Data source come from MINAGRI")
           )
 URL: https://github.com/omarbenites/cropdatape,
      http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos
