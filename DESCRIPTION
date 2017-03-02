@@ -1,5 +1,5 @@
 Package: cropdatape
-Title: Data from Agricultural Production of Crops in Peru
+Title: Data of Agricultural Production of Crops in Peru
 Version: 1.0.0
 Authors@R: c( 
           person("Omar", "Benites-Alfaro", email = "obacc07@gmail.com", role = c("aut", "cre")),
