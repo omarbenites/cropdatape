@@ -8,10 +8,8 @@ Authors@R: c(
           person("Giorgio", "Cruz-Fajardo", , "20120024@lamolina.edu.pe", "aut"),
           person("Grace", "Guevara-Diaz", , "20140052@lamolina.edu.pe", "aut"),
           person("Charlie", "Mendez-Morales", , "20140072@lamolina.edu.pe", "aut"),
-          person("Liliana", "Aragon-Caballero", , "lili@lamolina.edu.pe", "ctb"),
-          person("Raul", "Blas-Sevillano", , "rblas@lamolina.edu.pe", "ctb"),
-          person("Agronomy Faculty, National Agrarian University La Molina (UNALM)", role = "cph", comment = "Copyright holder of all R code"),
-          person("Agriculture Ministry of Peru (MINAGRI)", role = "cph", comment = "Data source come from MINAGRI")
+          person("Agronomy Faculty, National Agrarian University La Molina (UNALM)", role = "ctb"),
+          person("Agriculture Ministry of Peru (MINAGRI)", role = "cph", comment = "Data source holder")
           )
 URL: https://github.com/omarbenites/cropdatape,
      http://siea.minagri.gob.pe/siea/?q=publicaciones/anuarios-estadisticos
@@ -22,7 +20,10 @@ Description: Provides peruvian agricultural production data from the Agriculture
              The variables variables are sowing and harvest area per crop, yield, production and price per plot, every one year, from 2004 to 2014.
 Depends:
     R (>= 3.3.1)
-License:  MIT + file LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

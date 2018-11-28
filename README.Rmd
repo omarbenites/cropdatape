@@ -1,0 +1,93 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# cropdatape
+
+`cropdatape` provides peruvian agricultural production data from the Agriculture Minestry of Peru (MINAGRI). The first version includes 6 crops: rice, quinoa, potato, sweet potato, tomato and wheat; all of them across 24 departments. Initially,  in excel files which has been transformed and assembled using tidy data principles, i.e. each variable is in a column, each observation is a row and each value is in a cell. The variables variables are sowing and harvest area per crop, yield, production and price per plot, every one year, from 2004 to 2014.
+
+
+## Installation
+
+You can install `cropdatape` directly from `CRAN`:
+
+```{r, eval=FALSE}
+install.packages("cropdatape")
+
+```
+
+Or, you can install from `GitHub`:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("omarbenites/cropdatape")
+```
+
+The `cropdatape` data frame include 9 variables,
+
+| variable    | meaning                  |
+|:------------|:-------------------------|
+| crop        | crop                     |
+| department  | deparment or region      |
+| year        | year                     |
+| month       | month                    |
+| sowa        | sowing area              |
+| harva       | harvested area           |
+| production  | production               |
+| yield       | yield                    |
+| pricePlot   | price per plot           |
+
+
+
+
+## Example 1: Filter, grouped and summarize
+
+In this example, we will explore the cropdatape dataset, using three (dplyr) functionlities: `filter`, `group` and `summarize`. 
+
+1. `filter` crop by `sweet potato`.
+2. `group_by` department column.
+3. `summarise` by mean of the sweetpotato yield. 
+
+ `cropdatape` package:
+
+```{r,  message = FALSE, warning = FALSE} 
+#Load cropdatape package
+library(cropdatape)
+#Load dplyr package to filter and select information
+library(dplyr)
+
+cropdatape %>% 
+      filter(crop == "sweet potato") %>% 
+      group_by(department) %>% 
+      summarise(yieldMean = mean(yield, na.rm = TRUE))
+```
+
+
+## Example 2: Plot graphics with ggplot
+
+This second example explains we will explore the `yield` grouped by `crop`.
+
+```{r,  message = FALSE, warning = FALSE} 
+library(cropdatape)
+library(dplyr)
+library(ggplot2)
+ggplot(cropdatape, aes(x = crop, y = yield)) +
+  geom_boxplot(outlier.colour = "hotpink") +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
+```
+
+
+
+#' https://github.com/jennybc/gapminder
+#' https://github.com/jennybc/gapminder/blob/master/README.Rmd
+#' https://github.com/stan-dev/bayesplot/edit/master/README.md
