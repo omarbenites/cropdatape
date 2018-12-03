@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/README-"
 )
 ```
 
@@ -35,22 +35,20 @@ devtools::install_github("omarbenites/cropdatape")
 
 The `cropdatape` data frame include 9 variables,
 
-| variable    | meaning                  |
-|:------------|:-------------------------|
-| crop        | crop                     |
-| department  | deparment or region      |
-| year        | year                     |
-| month       | month                    |
-| sowa        | sowing area              |
-| harva       | harvested area           |
-| production  | production               |
-| yield       | yield                    |
-| pricePlot   | price per plot           |
+| variable    | meaning                  | units    |
+|:------------|:-------------------------|----------|
+| crop        | crop                     |  -       |
+| department  | deparment or region      |  -       |
+| year        | year                     |  -       |
+| month       | month                    |  -       |
+| sowa        | sowing area              |  ha      |
+| harva       | harvested area           |  ha      |
+| production  | production               |  t       |
+| yield       | yield                    |  kg/ha   |
+| pricePlot   | price per plot           |  s/kg    |
 
 
-
-
-## Example 1: Filter, grouped and summarize
+## Example 1: Filter, grouped and summarize cropdatape data
 
 In this example, we will explore the cropdatape dataset, using three (dplyr) functionlities: `filter`, `group` and `summarize`. 
 
@@ -65,29 +63,84 @@ In this example, we will explore the cropdatape dataset, using three (dplyr) fun
 library(cropdatape)
 #Load dplyr package to filter and select information
 library(dplyr)
-
 cropdatape %>% 
       filter(crop == "sweet potato") %>% 
-      group_by(department) %>% 
+      group_by(department, year) %>% 
       summarise(yieldMean = mean(yield, na.rm = TRUE))
 ```
 
 
-## Example 2: Plot graphics with ggplot
+## Example 2: Plot graphics with ggplot using cropdatape data
 
-This second example explains we will explore the `yield` grouped by `crop`.
+This second example we will explore the behaviour of the `yield` varible grouped by `crop`, from 2004 till 2014. The `crop` variable involves 6 crops: potato, quinoa, rice, sweet potato and wheat. 
 
-```{r,  message = FALSE, warning = FALSE} 
+
+```{r example, echo=TRUE, warning=FALSE}
 library(cropdatape)
-library(dplyr)
 library(ggplot2)
 ggplot(cropdatape, aes(x = crop, y = yield)) +
   geom_boxplot(outlier.colour = "hotpink") +
   geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
 ```
 
+## Example 3: Animations with gganimate
+
+To begin with, install the following packages:
+
+```{r}
+devtools::install_github("thomasp85/gganimate")
+devtools::install_github("thomasp85/transformr")
+devtools::install_github("thomasp85/tweenr")
+```
+
+Then, filter all the information related to sweetpotato
+
+```{r, message=FALSE, warning=FALSE}
+library(cropdatape)
+library(dplyr)
+
+sp <- cropdatape %>% 
+      filter(crop == "quinoa", department == "Puno") %>% 
+      group_by(department, year) %>% 
+      summarise(sowaMean = mean(sowa,na.rm = TRUE), 
+                harvaMean = mean(harva, na.rm = TRUE),
+                yieldMean = mean(yield, na.rm = TRUE))
+
+```
+
+#ToDO: Colocar los labels restantes
+
+```{r, cache=TRUE}
+library(gganimate)
+library(ggplot2)
+library(transformr)
+sp$year <- as.integer(sp$year)
+yearlbl<- sp$year
+ggplot(sp, aes(year, yieldMean)) + 
+  geom_point(size= 1.5)+
+  labs(title = 'Year: {frame_time}', x = 'Year', y = 'Yield') +
+  transition_time(year) +
+  ease_aes('linear')
+```
+
+With emojifonts package: 
+
+```{r}
+devtools::install_github("dill/emoGG")
+library(emoGG)
+```
+
+```{r, cache=TRUE}
+library(gganimate)
+library(ggplot2)
+library(transformr)
+sp$year <- as.integer(sp$year)
+yearlbl<- sp$year
+ggplot(sp, aes(year, yieldMean)) + 
+  geom_emoji(emoji="1f360")+
+  labs(title = 'Year: {frame_time}', x = 'Year', y = 'Yield') +
+  transition_time(year) +
+  ease_aes('linear')
+```
 
 
-#' https://github.com/jennybc/gapminder
-#' https://github.com/jennybc/gapminder/blob/master/README.Rmd
-#' https://github.com/stan-dev/bayesplot/edit/master/README.md

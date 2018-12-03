@@ -103,50 +103,60 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <thead><tr class="header">
 <th align="left">variable</th>
 <th align="left">meaning</th>
+<th>units</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left">crop</td>
 <td align="left">crop</td>
+<td>-</td>
 </tr>
 <tr class="even">
 <td align="left">department</td>
 <td align="left">deparment or region</td>
+<td>-</td>
 </tr>
 <tr class="odd">
 <td align="left">year</td>
 <td align="left">year</td>
+<td>-</td>
 </tr>
 <tr class="even">
 <td align="left">month</td>
 <td align="left">month</td>
+<td>-</td>
 </tr>
 <tr class="odd">
 <td align="left">sowa</td>
 <td align="left">sowing area</td>
+<td>ha</td>
 </tr>
 <tr class="even">
 <td align="left">harva</td>
 <td align="left">harvested area</td>
+<td>ha</td>
 </tr>
 <tr class="odd">
 <td align="left">production</td>
 <td align="left">production</td>
+<td>t</td>
 </tr>
 <tr class="even">
 <td align="left">yield</td>
 <td align="left">yield</td>
+<td>kg/ha</td>
 </tr>
 <tr class="odd">
 <td align="left">pricePlot</td>
 <td align="left">price per plot</td>
+<td>s/kg</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="example-1-filter-grouped-and-summarize" class="section level2">
+<div id="example-1-filter-grouped-and-summarize-cropdatape-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-1-filter-grouped-and-summarize" class="anchor"></a>Example 1: Filter, grouped and summarize</h2>
+<a href="#example-1-filter-grouped-and-summarize-cropdatape-data" class="anchor"></a>Example 1: Filter, grouped and summarize cropdatape data</h2>
 <p>In this example, we will explore the cropdatape dataset, using three (dplyr) functionlities: <code>filter</code>, <code>group</code> and <code>summarize</code>.</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -161,38 +171,138 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="kw">library</span>(cropdatape)
 <span class="co">#Load dplyr package to filter and select information</span>
 <span class="kw">library</span>(dplyr)
-
 cropdatape <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">      </span><span class="kw">filter</span>(crop <span class="op">==</span><span class="st"> "sweet potato"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">      </span><span class="kw">group_by</span>(department) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">group_by</span>(department, year) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">      </span><span class="kw">summarise</span>(<span class="dt">yieldMean =</span> <span class="kw">mean</span>(yield, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-<span class="co">#&gt; # A tibble: 24 x 2</span>
-<span class="co">#&gt;    department   yieldMean</span>
-<span class="co">#&gt;    &lt;fct&gt;            &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 Amazonas         8034.</span>
-<span class="co">#&gt;  2 Ancash          16776.</span>
-<span class="co">#&gt;  3 Arequipa         9705.</span>
-<span class="co">#&gt;  4 Ayacucho        10994.</span>
-<span class="co">#&gt;  5 Cajamarca        8370.</span>
-<span class="co">#&gt;  6 Callao            NaN </span>
-<span class="co">#&gt;  7 Cusco            7916.</span>
-<span class="co">#&gt;  8 Huancavelica     5450 </span>
-<span class="co">#&gt;  9 Huánuco         12445.</span>
-<span class="co">#&gt; 10 Ica             20442.</span>
-<span class="co">#&gt; # ... with 14 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 235 x 3</span>
+<span class="co">#&gt; # Groups:   department [?]</span>
+<span class="co">#&gt;    department  year yieldMean</span>
+<span class="co">#&gt;    &lt;fct&gt;      &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 Amazonas    2004      NaN </span>
+<span class="co">#&gt;  2 Amazonas    2005     7100.</span>
+<span class="co">#&gt;  3 Amazonas    2006     6754.</span>
+<span class="co">#&gt;  4 Amazonas    2007     9254.</span>
+<span class="co">#&gt;  5 Amazonas    2008    10185.</span>
+<span class="co">#&gt;  6 Amazonas    2009     8009.</span>
+<span class="co">#&gt;  7 Amazonas    2010     7817.</span>
+<span class="co">#&gt;  8 Amazonas    2011     7769.</span>
+<span class="co">#&gt;  9 Amazonas    2012     8017.</span>
+<span class="co">#&gt; 10 Amazonas    2013     7150.</span>
+<span class="co">#&gt; # ... with 225 more rows</span></code></pre></div>
 </div>
-<div id="example-2-plot-graphics-with-ggplot" class="section level2">
+<div id="example-2-plot-graphics-with-ggplot-using-cropdatape-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-2-plot-graphics-with-ggplot" class="anchor"></a>Example 2: Plot graphics with ggplot</h2>
-<p>This second example explains we will explore the <code>yield</code> grouped by <code>crop</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(<span class="st">"ggplot2"</span>)
-
+<a href="#example-2-plot-graphics-with-ggplot-using-cropdatape-data" class="anchor"></a>Example 2: Plot graphics with ggplot using cropdatape data</h2>
+<p>This second example we will explore the behaviour of the <code>yield</code> varible grouped by <code>crop</code>, from 2004 till 2014. The <code>crop</code> variable involves 6 crops: potato, quinoa, rice, sweet potato and wheat.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(cropdatape)
+<span class="kw">library</span>(ggplot2)
 <span class="kw">ggplot</span>(cropdatape, <span class="kw">aes</span>(<span class="dt">x =</span> crop, <span class="dt">y =</span> yield)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="st">"hotpink"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">0.1</span>, <span class="dt">height =</span> <span class="dv">0</span>), <span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>)</code></pre></div>
-<p><img src="README-unnamed-chunk-4-1.png" width="700"></p>
+<p><img src="reference/figures/README-example-1.png" width="700"></p>
 </div>
+<div id="example-3-animations-with-gganimate" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-3-animations-with-gganimate" class="anchor"></a>Example 3: Animations with gganimate</h2>
+<p>To begin with, install the following packages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"thomasp85/gganimate"</span>)
+<span class="co">#&gt; Skipping install of 'gganimate' from a github remote, the SHA1 (c116a211) has not changed since last install.</span>
+<span class="co">#&gt;   Use `force = TRUE` to force installation</span>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"thomasp85/transformr"</span>)
+<span class="co">#&gt; Skipping install of 'transformr' from a github remote, the SHA1 (3e007855) has not changed since last install.</span>
+<span class="co">#&gt;   Use `force = TRUE` to force installation</span>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"thomasp85/tweenr"</span>)
+<span class="co">#&gt; Skipping install of 'tweenr' from a github remote, the SHA1 (48ea2fda) has not changed since last install.</span>
+<span class="co">#&gt;   Use `force = TRUE` to force installation</span></code></pre></div>
+<p>Then, filter all the information related to sweetpotato</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(cropdatape)
+<span class="kw">library</span>(dplyr)
+
+sp &lt;-<span class="st"> </span>cropdatape <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">filter</span>(crop <span class="op">==</span><span class="st"> "quinoa"</span>, department <span class="op">==</span><span class="st"> "Puno"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">group_by</span>(department, year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">summarise</span>(<span class="dt">sowaMean =</span> <span class="kw">mean</span>(sowa,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
+                <span class="dt">harvaMean =</span> <span class="kw">mean</span>(harva, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+                <span class="dt">yieldMean =</span> <span class="kw">mean</span>(yield, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+</div>
+</div>
+<div id="todo-colocar-los-labels-restantes" class="section level1">
+<h1 class="hasAnchor">
+<a href="#todo-colocar-los-labels-restantes" class="anchor"></a>ToDO: Colocar los labels restantes</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gganimate)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(transformr)
+sp<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(sp<span class="op">$</span>year)
+yearlbl&lt;-<span class="st"> </span>sp<span class="op">$</span>year
+<span class="kw">ggplot</span>(sp, <span class="kw">aes</span>(year, yieldMean)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span> <span class="fl">1.5</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">'Year: {frame_time}'</span>, <span class="dt">x =</span> <span class="st">'Year'</span>, <span class="dt">y =</span> <span class="st">'Yield'</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">transition_time</span>(year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ease_aes</span>(<span class="st">'linear'</span>)
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.gif"><!-- --></p>
+<p>With emojifonts package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"dill/emoGG"</span>)
+<span class="co">#&gt; Skipping install of 'emoGG' from a github remote, the SHA1 (96a10181) has not changed since last install.</span>
+<span class="co">#&gt;   Use `force = TRUE` to force installation</span>
+<span class="kw">library</span>(emoGG)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gganimate)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(transformr)
+sp<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(sp<span class="op">$</span>year)
+yearlbl&lt;-<span class="st"> </span>sp<span class="op">$</span>year
+<span class="kw">ggplot</span>(sp, <span class="kw">aes</span>(year, yieldMean)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_emoji</span>(<span class="dt">emoji=</span><span class="st">"1f360"</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">'Year: {frame_time}'</span>, <span class="dt">x =</span> <span class="st">'Year'</span>, <span class="dt">y =</span> <span class="st">'Yield'</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">transition_time</span>(year) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ease_aes</span>(<span class="st">'linear'</span>)
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
+
+<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-8-1.gif"><!-- --></p>
 </div>
   </div>
 
