@@ -1,3 +1,5 @@
+^docs$
+^_pkgdown\.yml$
 # History files
 .Rhistory
 .Rapp.history
@@ -11,4 +13,7 @@
 ^README\.Rmd$
 ^README\.html$
 ^README_files/*
+^docs$
+^_pkgdown\.yml$
 ^README-.*\.png$
+^README_cache/*

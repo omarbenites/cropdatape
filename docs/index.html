@@ -97,7 +97,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"cropdatape"</span>)</code></pre></div>
 <p>Or, you can install from <code>GitHub</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"omarbenites/cropdatape"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"omarbenites/cropdatape"</span>)</code></pre></div>
 <p>The <code>cropdatape</code> data frame include 9 variables,</p>
 <table class="table">
 <thead><tr class="header">
@@ -153,10 +153,12 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 </tr>
 </tbody>
 </table>
-</div>
-<div id="example-1-filter-grouped-and-summarize-cropdatape-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-1-filter-grouped-and-summarize-cropdatape-data" class="anchor"></a>Example 1: Filter, grouped and summarize cropdatape data</h2>
+<div id="usage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h3>
+<div id="example-1-filter-grouped-and-summarize-cropdatape-data" class="section level4">
+<h4 class="hasAnchor">
+<a href="#example-1-filter-grouped-and-summarize-cropdatape-data" class="anchor"></a>Example 1: Filter, grouped and summarize cropdatape data</h4>
 <p>In this example, we will explore the cropdatape dataset, using three (dplyr) functionlities: <code>filter</code>, <code>group</code> and <code>summarize</code>.</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -191,9 +193,9 @@ cropdatape <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="co">#&gt; 10 Amazonas    2013     7150.</span>
 <span class="co">#&gt; # ... with 225 more rows</span></code></pre></div>
 </div>
-<div id="example-2-plot-graphics-with-ggplot-using-cropdatape-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-2-plot-graphics-with-ggplot-using-cropdatape-data" class="anchor"></a>Example 2: Plot graphics with ggplot using cropdatape data</h2>
+<div id="example-2-plot-graphics-with-ggplot-using-cropdatape-data" class="section level4">
+<h4 class="hasAnchor">
+<a href="#example-2-plot-graphics-with-ggplot-using-cropdatape-data" class="anchor"></a>Example 2: Plot graphics with ggplot using cropdatape data</h4>
 <p>This second example we will explore the behaviour of the <code>yield</code> varible grouped by <code>crop</code>, from 2004 till 2014. The <code>crop</code> variable involves 6 crops: potato, quinoa, rice, sweet potato and wheat.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(cropdatape)
 <span class="kw">library</span>(ggplot2)
@@ -202,20 +204,17 @@ cropdatape <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">position =</span> <span class="kw">position_jitter</span>(<span class="dt">width =</span> <span class="fl">0.1</span>, <span class="dt">height =</span> <span class="dv">0</span>), <span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>)</code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="700"></p>
 </div>
-<div id="example-3-animations-with-gganimate" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-3-animations-with-gganimate" class="anchor"></a>Example 3: Animations with gganimate</h2>
-<p>To begin with, install the following packages:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"thomasp85/gganimate"</span>)
-<span class="co">#&gt; Skipping install of 'gganimate' from a github remote, the SHA1 (c116a211) has not changed since last install.</span>
-<span class="co">#&gt;   Use `force = TRUE` to force installation</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"thomasp85/transformr"</span>)
-<span class="co">#&gt; Skipping install of 'transformr' from a github remote, the SHA1 (3e007855) has not changed since last install.</span>
-<span class="co">#&gt;   Use `force = TRUE` to force installation</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"thomasp85/tweenr"</span>)
-<span class="co">#&gt; Skipping install of 'tweenr' from a github remote, the SHA1 (48ea2fda) has not changed since last install.</span>
-<span class="co">#&gt;   Use `force = TRUE` to force installation</span></code></pre></div>
-<p>Then, filter all the information related to sweetpotato</p>
+<div id="example-3-animations-with-gganimate" class="section level4">
+<h4 class="hasAnchor">
+<a href="#example-3-animations-with-gganimate" class="anchor"></a>Example 3: Animations with gganimate</h4>
+<p>To begin with, install the following packages from Github:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Install first devtools package</span>
+<span class="co">#install.packages("devtools")</span>
+<span class="kw">library</span>(devtools)
+<span class="kw">install_github</span>(<span class="st">"thomasp85/gganimate"</span>)
+<span class="kw">install_github</span>(<span class="st">"thomasp85/transformr"</span>)
+<span class="kw">install_github</span>(<span class="st">"thomasp85/tweenr"</span>)</code></pre></div>
+<p>Then, we will filter all the information related to sweetpotato</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(cropdatape)
 <span class="kw">library</span>(dplyr)
 
@@ -225,11 +224,7 @@ sp &lt;-<span class="st"> </span>cropdatape <span class="op">%&gt;%</span><span 
 <span class="st">      </span><span class="kw">summarise</span>(<span class="dt">sowaMean =</span> <span class="kw">mean</span>(sowa,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
                 <span class="dt">harvaMean =</span> <span class="kw">mean</span>(harva, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
                 <span class="dt">yieldMean =</span> <span class="kw">mean</span>(yield, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
-</div>
-</div>
-<div id="todo-colocar-los-labels-restantes" class="section level1">
-<h1 class="hasAnchor">
-<a href="#todo-colocar-los-labels-restantes" class="anchor"></a>ToDO: Colocar los labels restantes</h1>
+<p>Plotting and animating the scatter graph <code>years</code> vs <code>yieldMean</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gganimate)
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(transformr)
@@ -237,72 +232,30 @@ sp<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">a
 yearlbl&lt;-<span class="st"> </span>sp<span class="op">$</span>year
 <span class="kw">ggplot</span>(sp, <span class="kw">aes</span>(year, yieldMean)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span> <span class="fl">1.5</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> yearlbl)<span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">'Year: {frame_time}'</span>, <span class="dt">x =</span> <span class="st">'Year'</span>, <span class="dt">y =</span> <span class="st">'Yield'</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">transition_time</span>(year) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ease_aes</span>(<span class="st">'linear'</span>)
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_point).</span></code></pre></div>
+<span class="st">  </span><span class="kw">ease_aes</span>(<span class="st">'linear'</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.gif"><!-- --></p>
-<p>With emojifonts package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"dill/emoGG"</span>)
-<span class="co">#&gt; Skipping install of 'emoGG' from a github remote, the SHA1 (96a10181) has not changed since last install.</span>
-<span class="co">#&gt;   Use `force = TRUE` to force installation</span>
+<p>Install and <code>emojifonts</code> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"dill/emoGG"</span>)
 <span class="kw">library</span>(emoGG)</code></pre></div>
+<p>Let the animation begins,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gganimate)
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(transformr)
 sp<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(sp<span class="op">$</span>year)
 yearlbl&lt;-<span class="st"> </span>sp<span class="op">$</span>year
 <span class="kw">ggplot</span>(sp, <span class="kw">aes</span>(year, yieldMean)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> yearlbl)<span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_emoji</span>(<span class="dt">emoji=</span><span class="st">"1f360"</span>)<span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">'Year: {frame_time}'</span>, <span class="dt">x =</span> <span class="st">'Year'</span>, <span class="dt">y =</span> <span class="st">'Yield'</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">transition_time</span>(year) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ease_aes</span>(<span class="st">'linear'</span>)
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span>
-
-<span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_emoji).</span></code></pre></div>
+<span class="st">  </span><span class="kw">ease_aes</span>(<span class="st">'linear'</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-8-1.gif"><!-- --></p>
+</div>
+</div>
+</div>
 </div>
   </div>
 

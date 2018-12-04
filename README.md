@@ -1,40 +1,205 @@
-[![Travis-CI Build Status](https://travis-ci.org/omarbenites/cropdatape.svg?branch=master)](https://travis-ci.org/omarbenites/cropdatape)
 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/omarbenites/cropdatape?branch=master&svg=true)](https://ci.appveyor.com/project/omarbenites/cropdatape)
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+cropdatape
+==========
 
+`cropdatape` provides peruvian agricultural production data from the Agriculture Minestry of Peru (MINAGRI). The first version includes 6 crops: rice, quinoa, potato, sweet potato, tomato and wheat; all of them across 24 departments. Initially, in excel files which has been transformed and assembled using tidy data principles, i.e. each variable is in a column, each observation is a row and each value is in a cell. The variables variables are sowing and harvest area per crop, yield, production and price per plot, every one year, from 2004 to 2014.
 
-# cropdatape package
+Installation
+------------
 
-Open data in agriculture is becoming crucial in order to give unrestricve access and reproducible sets of data worldwide. Large amounts of data regarding to yields, harvest areas, food production and nutrition, among others; are relevant to quantify how much we need to feed a big population that is increasing every year. However, this information is stored in formats and files that are not easy to retrieve and analyze. Reseachers, students, and people in general, spend huge amount time and effort cleaning data to get it ready for analysis `(Tidy Data, Hadley W, 2014)`.
+You can install `cropdatape` directly from `CRAN`:
 
-Peru is one the most important countries in term of bioversity and food production around the wolrd. Nevertheless, the access to open, clean and curated data is critical. For this reason, `cropdata` arises as an initiave to provide open and cleaned data ready to use. This package have been developed by researchers and students interested in promote findability and accessibility of agricultural crop's production in Peru using `R` and `tidy principles`.
-
-
-`cropdatape` provides peruvian agricultural production data from the Agriculture Minestry of Peru (MINAGRI). The first version includes `6` crops: `rice`, `quinoa`, `potato`, `sweet potato`, `tomato` and `wheat`; all of them across `24` departments. Initially,  in excel files which has been transformed and assembled using tidy data principles, i.e. each variable is in a column, each observation is a row and each value is in a cell. The variables variables are `sowing` and `harvest area per crop`, `yield`, `production` and `price per plot`, every one year, from `2004` to `2014`.
-
-
-### Installation
-
-To install this package you need package devtools:
-```{r eval=F}
-install.packages(devtools)
+``` r
+install.packages("cropdatape")
 ```
-Then type:
-```{r eval=F}
+
+Or, you can install from `GitHub`:
+
+``` r
+# install.packages("devtools")
 devtools::install_github("omarbenites/cropdatape")
 ```
 
+The `cropdatape` data frame include 9 variables,
+
+| variable   | meaning             | units |
+|:-----------|:--------------------|-------|
+| crop       | crop                | -     |
+| department | deparment or region | -     |
+| year       | year                | -     |
+| month      | month               | -     |
+| sowa       | sowing area         | ha    |
+| harva      | harvested area      | ha    |
+| production | production          | t     |
+| yield      | yield               | kg/ha |
+| pricePlot  | price per plot      | s/kg  |
+
 ### Usage
-To load the package type in your computer:
 
-```{r eval=F}
+### Example 1: Filter, grouped and summarize cropdatape data
+
+In this example, we will explore the cropdatape dataset, using three (dplyr) functionlities: `filter`, `group` and `summarize`.
+
+1.  `filter` crop by `sweet potato`.
+2.  `group_by` department column.
+3.  `summarise` by mean of the sweetpotato yield.
+
+`cropdatape` package:
+
+``` r
+#Load cropdatape package
 library(cropdatape)
+#Load dplyr package to filter and select information
+library(dplyr)
+cropdatape %>% 
+      filter(crop == "sweet potato") %>% 
+      group_by(department, year) %>% 
+      summarise(yieldMean = mean(yield, na.rm = TRUE))
+#> # A tibble: 235 x 3
+#> # Groups:   department [?]
+#>    department  year yieldMean
+#>    <fct>      <dbl>     <dbl>
+#>  1 Amazonas    2004      NaN 
+#>  2 Amazonas    2005     7100.
+#>  3 Amazonas    2006     6754.
+#>  4 Amazonas    2007     9254.
+#>  5 Amazonas    2008    10185.
+#>  6 Amazonas    2009     8009.
+#>  7 Amazonas    2010     7817.
+#>  8 Amazonas    2011     7769.
+#>  9 Amazonas    2012     8017.
+#> 10 Amazonas    2013     7150.
+#> # ... with 225 more rows
 ```
 
-#Help
+### Example 2: Plot graphics with ggplot using cropdatape data
 
-To get help about package:
+This second example we will explore the behaviour of the `yield` varible grouped by `crop`, from 2004 till 2014. The `crop` variable involves 6 crops: potato, quinoa, rice, sweet potato and wheat.
 
-```{r eval=F}
-help(package = cropdatape)
+``` r
+library(cropdatape)
+library(ggplot2)
+ggplot(cropdatape, aes(x = crop, y = yield)) +
+  geom_boxplot(outlier.colour = "hotpink") +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
 ```
+
+![](man/figures/README-example-1.png)
+
+Example 3: Animations with gganimate
+------------------------------------
+
+To begin with, install the following packages from Github:
+
+``` r
+#Install first devtools package
+#install.packages("devtools")
+library(devtools)
+install_github("thomasp85/gganimate")
+install_github("thomasp85/transformr")
+install_github("thomasp85/tweenr")
+```
+
+Then, we will filter all the information related to sweetpotato
+
+``` r
+library(cropdatape)
+library(dplyr)
+
+sp <- cropdatape %>% 
+      filter(crop == "quinoa", department == "Puno") %>% 
+      group_by(department, year) %>% 
+      summarise(sowaMean = mean(sowa,na.rm = TRUE), 
+                harvaMean = mean(harva, na.rm = TRUE),
+                yieldMean = mean(yield, na.rm = TRUE))
+```
+
+Plotting and animating the scatter graph `years` vs `yieldMean`
+
+``` r
+library(gganimate)
+library(ggplot2)
+library(transformr)
+sp$year <- as.integer(sp$year)
+yearlbl<- sp$year
+ggplot(sp, aes(year, yieldMean)) + 
+  geom_point(size= 1.5)+
+  scale_x_continuous(breaks = yearlbl)+
+  labs(title = 'Year: {frame_time}', x = 'Year', y = 'Yield') +
+  transition_time(year) +
+  ease_aes('linear')
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+
+#> Warning: Removed 1 rows containing missing values (geom_point).
+```
+
+![](man/figures/README-unnamed-chunk-6-1.gif)
+
+Install and `emojifonts` package:
+
+``` r
+devtools::install_github("dill/emoGG")
+library(emoGG)
+```
+
+Let the animation begins,
+
+``` r
+library(gganimate)
+library(ggplot2)
+library(transformr)
+sp$year <- as.integer(sp$year)
+yearlbl<- sp$year
+ggplot(sp, aes(year, yieldMean)) + 
+  scale_x_continuous(breaks = yearlbl)+
+  geom_emoji(emoji="1f360")+
+  labs(title = 'Year: {frame_time}', x = 'Year', y = 'Yield') +
+  transition_time(year) +
+  ease_aes('linear')
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+
+#> Warning: Removed 1 rows containing missing values (geom_emoji).
+```
+
+![](man/figures/README-unnamed-chunk-8-1.gif)

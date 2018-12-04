@@ -47,8 +47,10 @@ The `cropdatape` data frame include 9 variables,
 | yield       | yield                    |  kg/ha   |
 | pricePlot   | price per plot           |  s/kg    |
 
+### Usage
 
-## Example 1: Filter, grouped and summarize cropdatape data
+
+#### Example 1: Filter, grouped and summarize cropdatape data
 
 In this example, we will explore the cropdatape dataset, using three (dplyr) functionlities: `filter`, `group` and `summarize`. 
 
@@ -70,7 +72,7 @@ cropdatape %>%
 ```
 
 
-## Example 2: Plot graphics with ggplot using cropdatape data
+#### Example 2: Plot graphics with ggplot using cropdatape data
 
 This second example we will explore the behaviour of the `yield` varible grouped by `crop`, from 2004 till 2014. The `crop` variable involves 6 crops: potato, quinoa, rice, sweet potato and wheat. 
 
@@ -83,17 +85,20 @@ ggplot(cropdatape, aes(x = crop, y = yield)) +
   geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
 ```
 
-## Example 3: Animations with gganimate
+#### Example 3: Animations with gganimate
 
-To begin with, install the following packages:
+To begin with, install the following packages from Github:
 
-```{r}
-devtools::install_github("thomasp85/gganimate")
-devtools::install_github("thomasp85/transformr")
-devtools::install_github("thomasp85/tweenr")
+```{r,eval=FALSE}
+#Install first devtools package
+#install.packages("devtools")
+library(devtools)
+install_github("thomasp85/gganimate")
+install_github("thomasp85/transformr")
+install_github("thomasp85/tweenr")
 ```
 
-Then, filter all the information related to sweetpotato
+Then, we will filter all the information related to sweetpotato
 
 ```{r, message=FALSE, warning=FALSE}
 library(cropdatape)
@@ -108,9 +113,9 @@ sp <- cropdatape %>%
 
 ```
 
-#ToDO: Colocar los labels restantes
+Plotting and animating the scatter graph `years` vs `yieldMean`
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, warning=FALSE}
 library(gganimate)
 library(ggplot2)
 library(transformr)
@@ -118,25 +123,29 @@ sp$year <- as.integer(sp$year)
 yearlbl<- sp$year
 ggplot(sp, aes(year, yieldMean)) + 
   geom_point(size= 1.5)+
+  scale_x_continuous(breaks = yearlbl)+
   labs(title = 'Year: {frame_time}', x = 'Year', y = 'Yield') +
   transition_time(year) +
   ease_aes('linear')
 ```
 
-With emojifonts package: 
+Install and `emojifonts` package: 
 
-```{r}
+```{r,  message=FALSE, warning=FALSE}
 devtools::install_github("dill/emoGG")
 library(emoGG)
 ```
 
-```{r, cache=TRUE}
+Let the animation begins,
+
+```{r, cache=TRUE, warning=FALSE}
 library(gganimate)
 library(ggplot2)
 library(transformr)
 sp$year <- as.integer(sp$year)
 yearlbl<- sp$year
 ggplot(sp, aes(year, yieldMean)) + 
+  scale_x_continuous(breaks = yearlbl)+
   geom_emoji(emoji="1f360")+
   labs(title = 'Year: {frame_time}', x = 'Year', y = 'Yield') +
   transition_time(year) +
